@@ -10,8 +10,6 @@ import 'package:flutter_feature_barcode/core/extension/camera_image_extension.da
 import 'package:flutter_feature_camera/camera.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 
-import 'flutter_feature_barcode_platform_interface.dart';
-
 class FlutterFeatureBarcode {
   static final _orientations = <DeviceOrientation, int>{
     DeviceOrientation.portraitUp: 0,
@@ -23,11 +21,11 @@ class FlutterFeatureBarcode {
   late BarcodeScanner _barcodeScanner;
 
   static InputImage? inputImageFromCameraImage(
-      CameraImage cameraImage, {
-        required int sensorOrientation,
-        required DeviceOrientation deviceOrientation,
-        required CameraLensDirection cameraLensDirection,
-      }) {
+    CameraImage cameraImage, {
+    required int sensorOrientation,
+    required DeviceOrientation deviceOrientation,
+    required CameraLensDirection cameraLensDirection,
+  }) {
     // get image rotation
     // it is used in android to convert the InputImage from Dart to Java: https://github.com/flutter-ml/google_ml_kit_flutter/blob/master/packages/google_mlkit_commons/android/src/main/java/com/google_mlkit_commons/InputImageConverter.java
     // `rotation` is not used in iOS to convert the InputImage from Dart to Obj-C: https://github.com/flutter-ml/google_ml_kit_flutter/blob/master/packages/google_mlkit_commons/ios/Classes/MLKVisionImage%2BFlutterPlugin.m
@@ -75,16 +73,12 @@ class FlutterFeatureBarcode {
     );
   }
 
-  void initialize(){
+  void initialize() {
     final List<BarcodeFormat> formats = [BarcodeFormat.all];
     _barcodeScanner = BarcodeScanner(formats: formats);
   }
 
   Future<List<Barcode>> process(InputImage inputImage) async {
     return _barcodeScanner.processImage(inputImage);
-  }
-
-  Future<String?> getPlatformVersion() {
-    return FlutterFeatureBarcodePlatform.instance.getPlatformVersion();
   }
 }

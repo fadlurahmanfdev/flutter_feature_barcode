@@ -63,16 +63,6 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> with BaseMixinF
             alignment: Alignment.center,
             child: cameraController?.value.isInitialized == true ? CameraPreview(cameraController!) : Container(),
           ),
-          // IgnorePointer(
-          //   child: CustomPaint(
-          //     painter: CirclePainterV2(
-          //       progress: progress,
-          //       strokeWidth: 4.0,
-          //       overlayColor: Colors.white
-          //     ),
-          //     child: Container(),
-          //   ),
-          // ),
           Align(
             alignment: Alignment.bottomCenter,
             child: CameraControlLayoutWidget(
